@@ -32,7 +32,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
             specialImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showAlertDialog(user_list);
+                    showAlertDialog(userData);
                 }
             });
         }
@@ -40,7 +40,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlertDialog(user_list);
+                showAlertDialog(userData);
             }
         });
 
@@ -55,7 +55,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
             public void onClick(DialogInterface dialog, int which) {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
-                    User selectedUser = user_list.get(getAdapterPosition());
+                    User selectedUser = userData.get(getAdapterPosition());
                     Intent profileIntent = new Intent(itemView.getContext(), MainActivity.class);
                     profileIntent.putExtra("selected_user", selectedUser);
                     itemView.getContext().startActivity(profileIntent);

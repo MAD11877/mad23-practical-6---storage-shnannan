@@ -8,13 +8,6 @@ public class User implements Serializable {
     boolean followed;
     int id;
 
-    public User(String name, String description, int id, boolean followed) {
-        this.name = name;
-        this.description = description;
-        this.id = id;
-        this.followed = followed;
-    }
-
     public String getName() {
         return name;
     }
@@ -44,6 +37,13 @@ public class User implements Serializable {
     }
 
     public void setFollowed(boolean followed) {
+        this.followed = followed;
+    }
+
+    public User(String name, String description, int id, boolean followed) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
         this.followed = followed;
     }
 }
