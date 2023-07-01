@@ -46,4 +46,4 @@ https://firebase.google.com/docs/database/android/start
 8. Connect the login page to the Firebase remotely in your app.
 <img width="375" alt="8" src="https://user-images.githubusercontent.com/31364147/169678747-c46abc55-7bbc-4aaa-87f1-4c13939de0ae.PNG">
 
-9. Allow the user to login to the `ListActivity` if the username and password are correct.
+9. Allow the user to login to the `ListActivity` if the username and password are correct. 
