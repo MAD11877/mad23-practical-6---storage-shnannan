@@ -3,17 +3,11 @@ package sg.edu.np.mad.week2project;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    String name;
-    String description;
-    boolean followed;
-    int id;
+    public String name;
+    public String description;
 
-    public User(String name, String description, int id, boolean followed) {
-        this.name = name;
-        this.description = description;
-        this.id = id;
-        this.followed = followed;
-    }
+    public int id;
+    public boolean followed;
 
     public String getName() {
         return name;
@@ -44,6 +38,13 @@ public class User implements Serializable {
     }
 
     public void setFollowed(boolean followed) {
+        this.followed = followed;
+    }
+
+    public User(String name, String description, int id, boolean followed) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
         this.followed = followed;
     }
 }
