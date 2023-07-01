@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class MyDBHandler extends SQLiteOpenHelper {
     public static int DATABASE_VERSION = 1;
-    public static String DATABASE_NAME = "userDB.db";
+    public static String DATABASE_NAME = "usersDB.db";
     public static String TABLE_USERS = "users";
     public static String COLUMN_ID = "id";
     public static String COLUMN_USERNAME = "name";

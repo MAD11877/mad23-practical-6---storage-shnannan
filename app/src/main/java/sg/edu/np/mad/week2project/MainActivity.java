@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     final String title = "Main Activity";
@@ -34,16 +35,16 @@ public class MainActivity extends AppCompatActivity {
             follow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(user.followed == false){
-                        follow.setText("UnFollow");
-                        user.followed=true;
+                    if(!user.followed){
+                        follow.setText("Unfollow");
+                        user.setFollowed(true);
                         dbHandler.updateUser(user);
-                    }
-                    else
-                    {
-                        user.followed=false;
+                        Toast.makeText(MainActivity.this, "User followed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        user.setFollowed(false);
                         follow.setText("Follow");
                         dbHandler.updateUser(user);
+                        Toast.makeText(MainActivity.this, "User unfollowed", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
