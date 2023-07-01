@@ -26,8 +26,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         return new UserViewHolder(item, userData, viewType);
     }
 
-
-
     public void onBindViewHolder(UserViewHolder Holder, int position){
         User user_details = userData.get(position);
         Holder.txt.setText(user_details.getName());
