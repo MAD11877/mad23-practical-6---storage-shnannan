@@ -15,43 +15,45 @@ import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
     final String title = "Main Activity";
-    // Declare the User object
-    User myUser = new User();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.v(title, "Create!");
 
-        Intent rec = getIntent();
-        int value = rec.getIntExtra("id",0);
-        myUser = ListActivity.userList.get(value);
-
-        TextView UserName = findViewById(R.id.txtName);
-        UserName.setText(myUser.getName());
-        TextView description = findViewById(R.id.txtDescription);
-        description.setText(myUser.getDescription());
-        setFollowBtn();
-    }
-
-    private void setFollowBtn() {
-        Button follow = findViewById(R.id.followBtn);
-        if(myUser.followed) {
-            follow.setText("Unfollow");
-            Log.v(title,"Button: Follow clicked! Now Unfollowing");
+        TextView UserID= findViewById(R.id.txtName);
+        Intent intent= getIntent();
+        User user = (User) intent.getSerializableExtra("selected_user");
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        if (user != null) {
+            UserID.setText("Name" + user.getName());
+            Log.v("User ID", String.valueOf(user.getId()));
+            Button follow = findViewById(R.id.followBtn);
+            if(user.followed == false){
+                follow.setText("Follow");
+                Toast.makeText(getApplicationContext(), "Unfollowed", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                follow.setText("Unfollow");
+                Toast.makeText(getApplicationContext(), "Followed", Toast.LENGTH_SHORT).show();
+            }
+            follow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(user.followed == false){
+                        follow.setText("UnFollow");
+                        user.followed=true;
+                        dbHandler.updateUser(user);
+                    }
+                    else
+                    {
+                        user.followed=false;
+                        follow.setText("Follow");
+                        dbHandler.updateUser(user);
+                    }
+                }
+            });
         }
-        else {
-            follow.setText("Follow");
-            Log.v(title,"Button: Unfollow clicked! Now Following");
-        }
-    }
 
-    public void onFollowClick(View v) {
-        myUser.followed = !myUser.followed;
-        if(myUser.followed)
-            Toast.makeText(this, "Followed", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this,"Unfollowed", Toast.LENGTH_SHORT).show();
-        setFollowBtn();
     }
 }

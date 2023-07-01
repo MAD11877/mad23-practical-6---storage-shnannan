@@ -18,49 +18,29 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ListActivity extends AppCompatActivity {
-    final String title = "List Activity"; // differentiate Main Activity from List Activity
-    static ArrayList<User> userList = new ArrayList<>();
+    ArrayList<User> userList = new ArrayList<>();
+    final String title = "pre-populated rv";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         Log.v(title, "Create!");
 
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         for (int i = 0; i < 20; i++) {
-            String randomName = generateRandomName();
-            String randomDescription = generateRandomDescription();
-            boolean randomFollowed = generateRandomFollowedValue();
+            Random random = new Random();
+            int name = random.nextInt(Integer.MAX_VALUE - 10000000) + 10000000;
+            int desc = random.nextInt(Integer.MAX_VALUE - 10000000) + 10000000;
+            User user = new User(String.valueOf(name), String.valueOf(desc), i, false);
 
-            User u = new User(randomName, randomDescription, randomFollowed);
-            userList.add(u);
+            dbHandler.addUser(user);
         }
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        UserAdapter userAdapter = new UserAdapter(ListActivity.this, userList);
+        androidx.recyclerview.widget.RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        UserAdapter userAdapter = new UserAdapter(dbHandler.getUsers());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(userAdapter);
-    }
-
-    private int randomInteger(){
-        Random ran = new Random();
-        int myRandomNumber = ran.nextInt();
-        return myRandomNumber;
-    }
-
-    private String generateRandomName(){
-        String name = "Name";
-        Integer num = randomInteger();
-        return name + num;
-    }
-
-    private String generateRandomDescription(){
-        String desc = "Description ";
-        Integer num = randomInteger();
-        return desc + num;
-    }
-
-    private boolean generateRandomFollowedValue(){
-        Random random = new Random();
-        return random.nextBoolean();
     }
 }

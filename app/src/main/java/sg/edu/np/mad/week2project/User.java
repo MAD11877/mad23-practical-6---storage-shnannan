@@ -1,17 +1,20 @@
 package sg.edu.np.mad.week2project;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     String name;
     String description;
     boolean followed;
     int id;
-    public User(String userName, String userDescription, boolean userFollowed) {
-        this.name = userName;
-        this.description = userDescription;
-        this.followed = userFollowed;
+
+    public User(String name, String description, int id, boolean followed) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
+        this.followed = followed;
     }
-    public User() {
-    }
+
     public String getName() {
         return name;
     }
