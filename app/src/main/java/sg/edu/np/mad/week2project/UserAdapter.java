@@ -38,10 +38,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
     @Override
     public int getItemViewType(int position) {
         String name = userData.get(position).getName();
-        // Get the last digit of the name
+        // Get only the last digit of the name
         int lastDigit = Integer.parseInt(name.substring(name.length() - 1));
 
-        // Check if the last digit is 7
+        // Check if the last digit for names with 7
         if (lastDigit == 7) {
             return 1; // Unique view type for names ending in 7
         } else {

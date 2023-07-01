@@ -49,7 +49,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
         AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
         User selectedUser = user_list.get(getAdapterPosition());
         builder.setTitle("Profile");
-        builder.setMessage("Name: " + selectedUser.getName());
+        builder.setMessage("Username: " + selectedUser.getName());
         builder.setPositiveButton("View", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -27,16 +27,8 @@ public class ListActivity extends AppCompatActivity {
         Log.v(title, "Create!");
 
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        /*
-            for (int i = 0; i < 20; i++) {
-            Random random = new Random();
-            int name = random.nextInt(Integer.MAX_VALUE - 10000000) + 10000000;
-            int desc = random.nextInt(Integer.MAX_VALUE - 10000000) + 10000000;
-            User user = new User(String.valueOf(name), String.valueOf(desc), i, false);
 
-            dbHandler.addUser(user);
-        }
-         */
+        // randomize the name and description of the 20 users
         for (int i = 0; i < 20; i++) {
             Random random = new Random();
             int randNameNumber = random.nextInt(Integer.MAX_VALUE - 10000000) + 10000000;
@@ -45,9 +37,11 @@ public class ListActivity extends AppCompatActivity {
             String desc = "Description-" +  randDescNumber;
             User user = new User(name, desc, i, false);
 
+            // adding user to db
             dbHandler.addUser(user);
         }
 
+        // set the recycler view and layout animation
         androidx.recyclerview.widget.RecyclerView recyclerView = findViewById(R.id.recyclerView);
         UserAdapter userAdapter = new UserAdapter(dbHandler.getUsers());
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
